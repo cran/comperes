@@ -12,7 +12,7 @@
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2018-05-09" />
+<meta name="date" content="2018-10-12" />
 
 <title>Formats of Competition Results</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Formats of Competition Results</h1>
 <h4 class="author"><em>Evgeni Chasnovski</em></h4>
-<h4 class="date"><em>2018-05-09</em></h4>
+<h4 class="date"><em>2018-10-12</em></h4>
 
 
 
@@ -106,14 +106,14 @@ cr_long
 <span class="co">#&gt; # A tibble: 8 x 3</span>
 <span class="co">#&gt;    game player score</span>
 <span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1    1.     1.     1</span>
-<span class="co">#&gt; 2    1.    NA      2</span>
-<span class="co">#&gt; 3    1.    NA      3</span>
-<span class="co">#&gt; 4    2.     1.     4</span>
-<span class="co">#&gt; 5    2.     2.     5</span>
-<span class="co">#&gt; 6    3.     2.     6</span>
-<span class="co">#&gt; 7    3.     1.     7</span>
-<span class="co">#&gt; 8    4.     2.     8</span></code></pre></div>
+<span class="co">#&gt; 1     1      1     1</span>
+<span class="co">#&gt; 2     1     NA     2</span>
+<span class="co">#&gt; 3     1     NA     3</span>
+<span class="co">#&gt; 4     2      1     4</span>
+<span class="co">#&gt; 5     2      2     5</span>
+<span class="co">#&gt; 6     3      2     6</span>
+<span class="co">#&gt; 7     3      1     7</span>
+<span class="co">#&gt; 8     4      2     8</span></code></pre></div>
 <p>By default, <code>as_longcr()</code> repairs its input by applying set of heuristics to extract relevant data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(
   <span class="dt">PlayerRS =</span> <span class="st">&quot;a&quot;</span>,
@@ -130,7 +130,7 @@ cr_long
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;   game  player score PlayerRS extra</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 b         1.   10. a          -1.</span></code></pre></div>
+<span class="co">#&gt; 1 b          1    10 a           -1</span></code></pre></div>
 </div>
 <div id="wide-format" class="section level3">
 <h3>Wide format</h3>
@@ -150,9 +150,9 @@ cr_wide
 <span class="co">#&gt; # A tibble: 3 x 4</span>
 <span class="co">#&gt;   player1 score1 player2 score2</span>
 <span class="co">#&gt;     &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;</span>
-<span class="co">#&gt; 1      1.     -1      2.     -4</span>
-<span class="co">#&gt; 2      1.     -2      3.     -5</span>
-<span class="co">#&gt; 3      2.     -3      3.     -6</span></code></pre></div>
+<span class="co">#&gt; 1       1     -1       2     -4</span>
+<span class="co">#&gt; 2       1     -2       3     -5</span>
+<span class="co">#&gt; 3       2     -3       3     -6</span></code></pre></div>
 <p>By default, <code>as_widecr()</code> also does repairing of its input:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(
   <span class="dt">score =</span> <span class="dv">2</span>,
@@ -176,7 +176,7 @@ cr_wide
 <span class="co">#&gt; # A tibble: 1 x 8</span>
 <span class="co">#&gt;   game  player1 score1 player2 score2 player3 score3 extra</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 game  b           2. c           NA a           1.   -1.</span></code></pre></div>
+<span class="co">#&gt; 1 game  b            2 c           NA a            1    -1</span></code></pre></div>
 </div>
 </div>
 <div id="conversion" class="section level2">
@@ -187,12 +187,12 @@ cr_wide
 <span class="co">#&gt; # A tibble: 6 x 3</span>
 <span class="co">#&gt;    game player score</span>
 <span class="co">#&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     1     1.    -1</span>
-<span class="co">#&gt; 2     1     2.    -4</span>
-<span class="co">#&gt; 3     2     1.    -2</span>
-<span class="co">#&gt; 4     2     3.    -5</span>
-<span class="co">#&gt; 5     3     2.    -3</span>
-<span class="co">#&gt; 6     3     3.    -6</span>
+<span class="co">#&gt; 1     1      1    -1</span>
+<span class="co">#&gt; 2     1      2    -4</span>
+<span class="co">#&gt; 3     2      1    -2</span>
+<span class="co">#&gt; 4     2      3    -5</span>
+<span class="co">#&gt; 5     3      2    -3</span>
+<span class="co">#&gt; 6     3      3    -6</span>
 
 <span class="co"># Determines number of players in game as</span>
 <span class="co"># actual maximum number of players in games</span>
@@ -201,10 +201,10 @@ cr_wide
 <span class="co">#&gt; # A tibble: 4 x 7</span>
 <span class="co">#&gt;    game player1 score1 player2 score2 player3 score3</span>
 <span class="co">#&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;</span>
-<span class="co">#&gt; 1    1.      1.      1     NA       2      NA      3</span>
-<span class="co">#&gt; 2    2.      1.      4      2.      5      NA     NA</span>
-<span class="co">#&gt; 3    3.      2.      6      1.      7      NA     NA</span>
-<span class="co">#&gt; 4    4.      2.      8     NA      NA      NA     NA</span></code></pre></div>
+<span class="co">#&gt; 1     1       1      1      NA      2      NA      3</span>
+<span class="co">#&gt; 2     2       1      4       2      5      NA     NA</span>
+<span class="co">#&gt; 3     3       2      6       1      7      NA     NA</span>
+<span class="co">#&gt; 4     4       2      8      NA     NA      NA     NA</span></code></pre></div>
 </div>
 <div id="notes" class="section level2">
 <h2>Notes</h2>

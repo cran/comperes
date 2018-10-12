@@ -33,8 +33,8 @@ cr_long %>%
 ## ----summary_funs--------------------------------------------------------
 # Use .prefix to add prefix to summary columns
 cr_long %>%
-  join_player_summary(!!! summary_funs[1:2], .prefix = "player_") %>%
-  join_item_summary("season", !!! summary_funs[1:2], .prefix = "season_")
+  join_player_summary(!!!summary_funs[1:2], .prefix = "player_") %>%
+  join_item_summary("season", !!!summary_funs[1:2], .prefix = "season_")
 
 ## ----matchups------------------------------------------------------------
 get_matchups(cr_long)
@@ -50,7 +50,7 @@ cr_long %>%
 cr_long %>% h2h_mat(sum_score = sum(score1 + score2))
 
 ## ----h2h_funs------------------------------------------------------------
-cr_long %>% h2h_long(!!! h2h_funs)
+cr_long %>% h2h_long(!!!h2h_funs)
 
 ## ----h2h-factors---------------------------------------------------------
 cr_long_fac <- cr_long %>%

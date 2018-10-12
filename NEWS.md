@@ -1,3 +1,15 @@
+# comperes 0.2.1
+
+## Bug fixes
+
+* `is_widecr()` now returns `TRUE` on data frames with columns containing "score" or "player" in their names but which are note followed by digits (#2).
+
+## Other
+
+* Tweak `levels2()` for better performance.
+* React to `rlang` version 0.3.0.
+
+
 # comperes 0.2.0 (2017-05-09)
 
 Initial CRAN release

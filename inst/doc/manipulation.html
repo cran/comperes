@@ -12,7 +12,7 @@
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2018-05-09" />
+<meta name="date" content="2018-10-12" />
 
 <title>Manipulate Competition Results</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Manipulate Competition Results</h1>
 <h4 class="author"><em>Evgeni Chasnovski</em></h4>
-<h4 class="date"><em>2018-05-09</em></h4>
+<h4 class="date"><em>2018-10-12</em></h4>
 
 
 
@@ -99,67 +99,83 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="dt">score  =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,
   <span class="dt">season =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">3</span>))
 ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">as_longcr</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">as_longcr</span>()
+<span class="co">#&gt; Warning: `list_len()` is soft-deprecated as of rlang 0.2.0.</span>
+<span class="co">#&gt; Please use `new_list()` instead</span>
+<span class="co">#&gt; This warning is displayed once per session.</span>
+<span class="co">#&gt; Warning: `lang()` is soft-deprecated as of rlang 0.2.0.</span>
+<span class="co">#&gt; Please use `call2()` instead</span>
+<span class="co">#&gt; This warning is displayed once per session.</span>
+<span class="co">#&gt; Warning: `new_overscope()` is soft-deprecated as of rlang 0.2.0.</span>
+<span class="co">#&gt; Please use `new_data_mask()` instead</span>
+<span class="co">#&gt; This warning is displayed once per session.</span>
+<span class="co">#&gt; Warning: `overscope_eval_next()` is soft-deprecated as of rlang 0.2.0.</span>
+<span class="co">#&gt; Please use `eval_tidy()` with a data mask instead</span>
+<span class="co">#&gt; This warning is displayed once per session.</span></code></pre></div>
 <p>Functions discussed in these topics leverage <code>dplyr</code>’s grammar of data manipulation. Only basic knowledge is enough to use them. Also a knowledge of <code>rlang</code>’s quotation mechanism is preferred.</p>
 <div id="item-summaries" class="section level2">
 <h2>Item summaries</h2>
 <p>Item summary is understand as some summary measurements (of arbitrary nature) of item (one or more columns) present in data. To compute them, <code>comperes</code> offers <code>summarise_*()</code> family of functions in which summary functions should be provided as in <code>dplyr::summarise()</code>. Basically, they are wrappers for grouped summarise with forced ungrouping, conversion to <code>tibble</code> and possible adding prefix to summaries. Couple of examples:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_player</span>(<span class="dt">mean_score =</span> <span class="kw">mean</span>(score))
+<span class="co">#&gt; Warning: The `printer` argument is soft-deprecated as of rlang 0.3.0.</span>
+<span class="co">#&gt; This warning is displayed once per session.</span>
 <span class="co">#&gt; # A tibble: 3 x 2</span>
 <span class="co">#&gt;   player mean_score</span>
 <span class="co">#&gt;    &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1.       4.00</span>
-<span class="co">#&gt; 2     2.       6.33</span>
-<span class="co">#&gt; 3    NA        2.50</span>
+<span class="co">#&gt; 1      1       4   </span>
+<span class="co">#&gt; 2      2       6.33</span>
+<span class="co">#&gt; 3     NA       2.5</span>
 
 cr_long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_game</span>(<span class="dt">min_score =</span> <span class="kw">min</span>(score), <span class="dt">max_score =</span> <span class="kw">max</span>(score))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   game  min_score max_score</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 a1           1.        3.</span>
-<span class="co">#&gt; 2 a2           4.        5.</span>
-<span class="co">#&gt; 3 b1           6.        7.</span>
-<span class="co">#&gt; 4 b2           8.        8.</span>
+<span class="co">#&gt; 1 a1            1         3</span>
+<span class="co">#&gt; 2 a2            4         5</span>
+<span class="co">#&gt; 3 b1            6         7</span>
+<span class="co">#&gt; 4 b2            8         8</span>
 
 cr_long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_item</span>(<span class="st">&quot;season&quot;</span>, <span class="dt">sd_score =</span> <span class="kw">sd</span>(score))
 <span class="co">#&gt; # A tibble: 2 x 2</span>
 <span class="co">#&gt;   season sd_score</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 A          1.58</span>
-<span class="co">#&gt; 2 B          1.00</span></code></pre></div>
+<span class="co">#&gt; 2 B          1</span></code></pre></div>
 <p>For convenient transformation of results there are <code>join_*_summary()</code> family of functions, which compute respective summaries and join them to original data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_long <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">join_item_summary</span>(<span class="st">&quot;season&quot;</span>, <span class="dt">season_mean_score =</span> <span class="kw">mean</span>(score)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">score =</span> score <span class="op">-</span><span class="st"> </span>season_mean_score)
+<span class="co">#&gt; Warning: `chr_along()` is soft-deprecated as of rlang 0.2.0.</span>
+<span class="co">#&gt; This warning is displayed once per session.</span>
 <span class="co">#&gt; # A longcr object:</span>
 <span class="co">#&gt; # A tibble: 8 x 5</span>
 <span class="co">#&gt;   game  player score season season_mean_score</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 a1        1.   -2. A                     3.</span>
-<span class="co">#&gt; 2 a1       NA    -1. A                     3.</span>
-<span class="co">#&gt; 3 a1       NA     0. A                     3.</span>
-<span class="co">#&gt; 4 a2        1.    1. A                     3.</span>
-<span class="co">#&gt; 5 a2        2.    2. A                     3.</span>
-<span class="co">#&gt; 6 b1        2.   -1. B                     7.</span>
-<span class="co">#&gt; 7 b1        1.    0. B                     7.</span>
-<span class="co">#&gt; 8 b2        2.    1. B                     7.</span></code></pre></div>
+<span class="co">#&gt; 1 a1         1    -2 A                      3</span>
+<span class="co">#&gt; 2 a1        NA    -1 A                      3</span>
+<span class="co">#&gt; 3 a1        NA     0 A                      3</span>
+<span class="co">#&gt; 4 a2         1     1 A                      3</span>
+<span class="co">#&gt; 5 a2         2     2 A                      3</span>
+<span class="co">#&gt; 6 b1         2    -1 B                      7</span>
+<span class="co">#&gt; 7 b1         1     0 B                      7</span>
+<span class="co">#&gt; 8 b2         2     1 B                      7</span></code></pre></div>
 <p>For common summary functions <code>comperes</code> has a list <code>summary_funs</code> with 8 quoted expressions to be used with <code>rlang</code>’s unquoting mechanism:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use .prefix to add prefix to summary columns</span>
 cr_long <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">join_player_summary</span>(<span class="op">!!!</span><span class="st"> </span>summary_funs[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">.prefix =</span> <span class="st">&quot;player_&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">join_item_summary</span>(<span class="st">&quot;season&quot;</span>, <span class="op">!!!</span><span class="st"> </span>summary_funs[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">.prefix =</span> <span class="st">&quot;season_&quot;</span>)
+<span class="st">  </span><span class="kw">join_player_summary</span>(<span class="op">!!!</span>summary_funs[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">.prefix =</span> <span class="st">&quot;player_&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">join_item_summary</span>(<span class="st">&quot;season&quot;</span>, <span class="op">!!!</span>summary_funs[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">.prefix =</span> <span class="st">&quot;season_&quot;</span>)
 <span class="co">#&gt; # A longcr object:</span>
 <span class="co">#&gt; # A tibble: 8 x 8</span>
 <span class="co">#&gt;   game  player score season player_min_score player_max_score</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;             &lt;dbl&gt;            &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 a1        1.     1 A                    1.               7.</span>
-<span class="co">#&gt; 2 a1       NA      2 A                    2.               3.</span>
-<span class="co">#&gt; 3 a1       NA      3 A                    2.               3.</span>
-<span class="co">#&gt; 4 a2        1.     4 A                    1.               7.</span>
-<span class="co">#&gt; 5 a2        2.     5 A                    5.               8.</span>
-<span class="co">#&gt; 6 b1        2.     6 B                    5.               8.</span>
-<span class="co">#&gt; 7 b1        1.     7 B                    1.               7.</span>
-<span class="co">#&gt; 8 b2        2.     8 B                    5.               8.</span>
+<span class="co">#&gt; 1 a1         1     1 A                     1                7</span>
+<span class="co">#&gt; 2 a1        NA     2 A                     2                3</span>
+<span class="co">#&gt; 3 a1        NA     3 A                     2                3</span>
+<span class="co">#&gt; 4 a2         1     4 A                     1                7</span>
+<span class="co">#&gt; 5 a2         2     5 A                     5                8</span>
+<span class="co">#&gt; 6 b1         2     6 B                     5                8</span>
+<span class="co">#&gt; 7 b1         1     7 B                     1                7</span>
+<span class="co">#&gt; 8 b2         2     8 B                     5                8</span>
 <span class="co">#&gt; # ... with 2 more variables: season_min_score &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   season_max_score &lt;dbl&gt;</span></code></pre></div>
 </div>
@@ -168,28 +184,30 @@ cr_long <span class="op">%&gt;%</span>
 <p>Head-to-Head value is a summary statistic of direct confrontation between two players. It is assumed that this value can be computed based only on the players’ <strong>matchups</strong>, data of actual participation for ordered pair of players in one game.</p>
 <p>To compute matchups, <code>comperes</code> has <code>get_matchups()</code>, which returns a <code>widecr</code> object with all matchups actually present in results (including matchups of players with themselves). <strong>Note</strong> that missing values in <code>player</code> column are treated as separate players. It allows operating with games where multiple players’ identifiers are not known. However, when computing Head-to-Head values they treated as single player. Example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_matchups</span>(cr_long)
+<span class="co">#&gt; Warning: `.named` can no longer be a width</span>
+<span class="co">#&gt; This warning is displayed once per session.</span>
 <span class="co">#&gt; # A widecr object:</span>
 <span class="co">#&gt; # A tibble: 18 x 5</span>
 <span class="co">#&gt;    game  player1 score1 player2 score2</span>
 <span class="co">#&gt;    &lt;chr&gt;   &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;</span>
-<span class="co">#&gt;  1 a1         1.      1      1.      1</span>
-<span class="co">#&gt;  2 a1         1.      1     NA       2</span>
-<span class="co">#&gt;  3 a1         1.      1     NA       3</span>
-<span class="co">#&gt;  4 a1        NA       2      1.      1</span>
-<span class="co">#&gt;  5 a1        NA       2     NA       2</span>
-<span class="co">#&gt;  6 a1        NA       2     NA       3</span>
-<span class="co">#&gt;  7 a1        NA       3      1.      1</span>
-<span class="co">#&gt;  8 a1        NA       3     NA       2</span>
-<span class="co">#&gt;  9 a1        NA       3     NA       3</span>
-<span class="co">#&gt; 10 a2         1.      4      1.      4</span>
-<span class="co">#&gt; 11 a2         1.      4      2.      5</span>
-<span class="co">#&gt; 12 a2         2.      5      1.      4</span>
-<span class="co">#&gt; 13 a2         2.      5      2.      5</span>
-<span class="co">#&gt; 14 b1         2.      6      2.      6</span>
-<span class="co">#&gt; 15 b1         2.      6      1.      7</span>
-<span class="co">#&gt; 16 b1         1.      7      2.      6</span>
-<span class="co">#&gt; 17 b1         1.      7      1.      7</span>
-<span class="co">#&gt; 18 b2         2.      8      2.      8</span></code></pre></div>
+<span class="co">#&gt;  1 a1          1      1       1      1</span>
+<span class="co">#&gt;  2 a1          1      1      NA      2</span>
+<span class="co">#&gt;  3 a1          1      1      NA      3</span>
+<span class="co">#&gt;  4 a1         NA      2       1      1</span>
+<span class="co">#&gt;  5 a1         NA      2      NA      2</span>
+<span class="co">#&gt;  6 a1         NA      2      NA      3</span>
+<span class="co">#&gt;  7 a1         NA      3       1      1</span>
+<span class="co">#&gt;  8 a1         NA      3      NA      2</span>
+<span class="co">#&gt;  9 a1         NA      3      NA      3</span>
+<span class="co">#&gt; 10 a2          1      4       1      4</span>
+<span class="co">#&gt; 11 a2          1      4       2      5</span>
+<span class="co">#&gt; 12 a2          2      5       1      4</span>
+<span class="co">#&gt; 13 a2          2      5       2      5</span>
+<span class="co">#&gt; 14 b1          2      6       2      6</span>
+<span class="co">#&gt; 15 b1          2      6       1      7</span>
+<span class="co">#&gt; 16 b1          1      7       2      6</span>
+<span class="co">#&gt; 17 b1          1      7       1      7</span>
+<span class="co">#&gt; 18 b2          2      8       2      8</span></code></pre></div>
 <p>Head-to-Head values can be stored in two ways:</p>
 <ul>
 <li><strong>Long</strong>, a <code>tibble</code> with columns <code>player1</code> and <code>player2</code> which identify ordered pair of players, and columns corresponding to Head-to-Head values. Computation is done with <code>h2h_long()</code> which returns an object of class <code>h2h_long</code>. Head-to-Head functions are specified as in <code>dplyr</code>’s grammar <strong>for results matchups</strong>:</li>
@@ -203,15 +221,15 @@ cr_long <span class="op">%&gt;%</span>
 <span class="co">#&gt; # A tibble: 9 x 4</span>
 <span class="co">#&gt;   player1 player2 abs_diff num_wins</span>
 <span class="co">#&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;</span>
-<span class="co">#&gt; 1      1.      1.    0.           0</span>
-<span class="co">#&gt; 2      1.      2.    1.00         1</span>
-<span class="co">#&gt; 3      1.     NA     1.50         0</span>
-<span class="co">#&gt; 4      2.      1.    1.00         1</span>
-<span class="co">#&gt; 5      2.      2.    0.           0</span>
-<span class="co">#&gt; 6      2.     NA    NA           NA</span>
-<span class="co">#&gt; 7     NA       1.    1.50         2</span>
-<span class="co">#&gt; 8     NA       2.   NA           NA</span>
-<span class="co">#&gt; 9     NA      NA     0.500        1</span></code></pre></div>
+<span class="co">#&gt; 1       1       1      0          0</span>
+<span class="co">#&gt; 2       1       2      1          1</span>
+<span class="co">#&gt; 3       1      NA      1.5        0</span>
+<span class="co">#&gt; 4       2       1      1          1</span>
+<span class="co">#&gt; 5       2       2      0          0</span>
+<span class="co">#&gt; 6       2      NA     NA         NA</span>
+<span class="co">#&gt; 7      NA       1      1.5        2</span>
+<span class="co">#&gt; 8      NA       2     NA         NA</span>
+<span class="co">#&gt; 9      NA      NA      0.5        1</span></code></pre></div>
 <ul>
 <li><strong>Matrix</strong>, a matrix where rows and columns describe ordered pair of players and entries - Head-to-Head values. This allows convenient storage of only one Head-to-Head value. Computation is done with <code>h2h_mat()</code> which returns an object of class <code>h2h_mat</code>. Head-to-Head functions are specified as in <code>h2h_long()</code>:</li>
 </ul>
@@ -222,20 +240,20 @@ cr_long <span class="op">%&gt;%</span>
 <span class="co">#&gt; 2    22 38   NA</span>
 <span class="co">#&gt; &lt;NA&gt;  7 NA   20</span></code></pre></div>
 <p><code>comperes</code> also offers a list <code>h2h_funs</code> of 9 common Head-to-Head functions as quoted expressions to be used with <code>rlang</code>’s unquoting mechanism:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">h2h_long</span>(<span class="op">!!!</span><span class="st"> </span>h2h_funs)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">h2h_long</span>(<span class="op">!!!</span>h2h_funs)
 <span class="co">#&gt; # A long format of Head-to-Head values:</span>
 <span class="co">#&gt; # A tibble: 9 x 11</span>
-<span class="co">#&gt;   player1 player2 mean_score_diff mean_score_diff_pos mean_score</span>
-<span class="co">#&gt;     &lt;dbl&gt;   &lt;dbl&gt;           &lt;dbl&gt;               &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1      1.      1.            0.                  0.         4.00</span>
-<span class="co">#&gt; 2      1.      2.            0.                  0.         5.50</span>
-<span class="co">#&gt; 3      1.     NA            -1.50                0.         1.00</span>
-<span class="co">#&gt; 4      2.      1.            0.                  0.         5.50</span>
-<span class="co">#&gt; 5      2.      2.            0.                  0.         6.33</span>
-<span class="co">#&gt; 6      2.     NA            NA                  NA         NA   </span>
-<span class="co">#&gt; 7     NA       1.            1.50                1.50       2.50</span>
-<span class="co">#&gt; 8     NA       2.           NA                  NA         NA   </span>
-<span class="co">#&gt; 9     NA      NA             0.                  0.         2.50</span>
+<span class="co">#&gt;   player1 player2 mean_score_diff mean_score_diff… mean_score</span>
+<span class="co">#&gt;     &lt;dbl&gt;   &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1       1       1             0                0         4   </span>
+<span class="co">#&gt; 2       1       2             0                0         5.5 </span>
+<span class="co">#&gt; 3       1      NA            -1.5              0         1   </span>
+<span class="co">#&gt; 4       2       1             0                0         5.5 </span>
+<span class="co">#&gt; 5       2       2             0                0         6.33</span>
+<span class="co">#&gt; 6       2      NA            NA               NA        NA   </span>
+<span class="co">#&gt; 7      NA       1             1.5              1.5       2.5 </span>
+<span class="co">#&gt; 8      NA       2            NA               NA        NA   </span>
+<span class="co">#&gt; 9      NA      NA             0                0         2.5 </span>
 <span class="co">#&gt; # ... with 6 more variables: sum_score_diff &lt;int&gt;,</span>
 <span class="co">#&gt; #   sum_score_diff_pos &lt;dbl&gt;, sum_score &lt;int&gt;, num_wins &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   num_wins2 &lt;dbl&gt;, num &lt;int&gt;</span></code></pre></div>
@@ -250,15 +268,15 @@ cr_long_fac <span class="op">%&gt;%</span>
 <span class="co">#&gt; # A tibble: 9 x 3</span>
 <span class="co">#&gt;   player1 player2 abs_diff</span>
 <span class="co">#&gt;   &lt;fct&gt;   &lt;fct&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1       1             0.</span>
-<span class="co">#&gt; 2 1       2             1.</span>
-<span class="co">#&gt; 3 1       3          -100.</span>
-<span class="co">#&gt; 4 2       1             1.</span>
-<span class="co">#&gt; 5 2       2             0.</span>
-<span class="co">#&gt; 6 2       3          -100.</span>
-<span class="co">#&gt; 7 3       1          -100.</span>
-<span class="co">#&gt; 8 3       2          -100.</span>
-<span class="co">#&gt; 9 3       3          -100.</span>
+<span class="co">#&gt; 1 1       1              0</span>
+<span class="co">#&gt; 2 1       2              1</span>
+<span class="co">#&gt; 3 1       3           -100</span>
+<span class="co">#&gt; 4 2       1              1</span>
+<span class="co">#&gt; 5 2       2              0</span>
+<span class="co">#&gt; 6 2       3           -100</span>
+<span class="co">#&gt; 7 3       1           -100</span>
+<span class="co">#&gt; 8 3       2           -100</span>
+<span class="co">#&gt; 9 3       3           -100</span>
 
 cr_long_fac <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">h2h_mat</span>(<span class="kw">mean</span>(<span class="kw">abs</span>(score1 <span class="op">-</span><span class="st"> </span>score2)),
@@ -276,15 +294,15 @@ cr_long_fac <span class="op">%&gt;%</span>
 <span class="co">#&gt; # A tibble: 9 x 3</span>
 <span class="co">#&gt;   player1 player2 h2h_value</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1       1            4.00</span>
-<span class="co">#&gt; 2 1       2            5.50</span>
-<span class="co">#&gt; 3 1       &lt;NA&gt;         1.00</span>
-<span class="co">#&gt; 4 2       1            5.50</span>
+<span class="co">#&gt; 1 1       1            4   </span>
+<span class="co">#&gt; 2 1       2            5.5 </span>
+<span class="co">#&gt; 3 1       &lt;NA&gt;         1   </span>
+<span class="co">#&gt; 4 2       1            5.5 </span>
 <span class="co">#&gt; 5 2       2            6.33</span>
 <span class="co">#&gt; 6 2       &lt;NA&gt;        NA   </span>
-<span class="co">#&gt; 7 &lt;NA&gt;    1            2.50</span>
+<span class="co">#&gt; 7 &lt;NA&gt;    1            2.5 </span>
 <span class="co">#&gt; 8 &lt;NA&gt;    2           NA   </span>
-<span class="co">#&gt; 9 &lt;NA&gt;    &lt;NA&gt;         2.50</span>
+<span class="co">#&gt; 9 &lt;NA&gt;    &lt;NA&gt;         2.5</span>
 
 cr_long <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">h2h_long</span>(<span class="dt">mean_score1 =</span> <span class="kw">mean</span>(score1), <span class="dt">mean_score2 =</span> <span class="kw">mean</span>(score2)) <span class="op">%&gt;%</span>
@@ -326,15 +344,26 @@ pair_value_mat <span class="op">%&gt;%</span>
 <h2>Pairgames</h2>
 <p>For some ranking algorithms it crucial that games should only be between two players. <code>comperes</code> has function <code>to_pairgames()</code> for this. It removes games with one player. Games with three and more players <code>to_pairgames()</code> splits into <strong>separate games</strong> between unordered pairs of different players without specific order. <strong>Note</strong> that game identifiers are changed to integers but order of initial games is preserved. Example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">to_pairgames</span>(cr_long)
+<span class="co">#&gt; Warning: Unquoting language objects with `!!!` is soft-deprecated as of rlang 0.3.0.</span>
+<span class="co">#&gt; Please use `!!` instead.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Bad:</span>
+<span class="co">#&gt;   dplyr::select(data, !!!enquo(x))</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Good:</span>
+<span class="co">#&gt;   dplyr::select(data, !!enquo(x))    # Unquote single quosure</span>
+<span class="co">#&gt;   dplyr::select(data, !!!enquos(x))  # Splice list of quosures</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; This warning is displayed once per session.</span>
 <span class="co">#&gt; # A widecr object:</span>
 <span class="co">#&gt; # A tibble: 5 x 5</span>
 <span class="co">#&gt;    game player1 score1 player2 score2</span>
 <span class="co">#&gt;   &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;</span>
-<span class="co">#&gt; 1     1      1.      1     NA       2</span>
-<span class="co">#&gt; 2     2      1.      1     NA       3</span>
-<span class="co">#&gt; 3     3     NA       2     NA       3</span>
-<span class="co">#&gt; 4     4      1.      4      2.      5</span>
-<span class="co">#&gt; 5     5      2.      6      1.      7</span></code></pre></div>
+<span class="co">#&gt; 1     1       1      1      NA      2</span>
+<span class="co">#&gt; 2     2       1      1      NA      3</span>
+<span class="co">#&gt; 3     3      NA      2      NA      3</span>
+<span class="co">#&gt; 4     4       1      4       2      5</span>
+<span class="co">#&gt; 5     5       2      6       1      7</span></code></pre></div>
 </div>
 
 

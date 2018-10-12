@@ -64,14 +64,16 @@
 #' throws error otherwise.
 #'
 #' @return `is_widecr()` returns `TRUE` if its argument is appropriate object
-#'   of class `widecr`: it should inherit classes `widecr`, `tbl_df` (in other
-#'   words, to be [tibble][tibble::tibble]) and have complete pairs of
-#'   "player"-"score" columns where pair is detected by __digits__ after strings
-#'   "player" and "score" respectively.
+#' of class `widecr`: it should inherit classes `widecr`, `tbl_df` (in other
+#' words, to be [tibble][tibble::tibble]) and have complete pairs of
+#' "player"-"score" columns where pair is detected by __digits__ after strings
+#' "player" and "score" respectively. Columns of "player" and "score" types
+#' shouldn't have any extra symbols except type name and digits after it. All
+#' other columns are considered as "extra columns".
 #'
 #' `as_widecr()` returns an object of class `widecr`.
 #'
-#' [as_tibble()[tibble::as_tibble()] applied to `widecr` object drops `widecr`
+#' [as_tibble()][tibble::as_tibble()] applied to `widecr` object drops `widecr`
 #' class.
 #'
 #' @examples
@@ -100,7 +102,7 @@ is_widecr <- function(cr_data) {
   }
   names_cr <- tolower(colnames(cr_data))
   names_df <- tibble::tibble(
-    name = names_cr[grepl("player|score", x = names_cr)]
+    name = names_cr[grepl("^(player|score)[0-9]+$", x = names_cr)]
   )
 
   if (nrow(names_df) == 0) {
@@ -176,8 +178,8 @@ as_widecr.longcr <- function(cr_data, repair = TRUE, ...) {
 
       game_data %>%
         rename(
-          !! player_name := .data$player,
-          !! score_name := .data$score
+          !!player_name := .data$player,
+          !!score_name := .data$score
         ) %>%
         select(-.data$in_game_id)
     }) %>%
@@ -225,14 +227,14 @@ repair_widecr <- function(cr_data, ...) {
       group = factor(.data$group, levels = c("player", "score")),
       pair = as.integer(factor(.data$pair))
     ) %>%
-    tidyr::complete(!!! rlang::syms(c("group", "pair"))) %>%
+    tidyr::complete(!!!rlang::syms(c("group", "pair"))) %>%
     mutate(
       group = as.character(.data$group),
       pair = formatC(.data$pair, width = get_formatC_width(.data$pair),
                      format = "d", flag = "0")
     ) %>%
     arrange(.data$pair, .data$group) %>%
-    tidyr::unite(col = "target", !!! rlang::syms(c("group", "pair")), sep = "")
+    tidyr::unite(col = "target", !!!rlang::syms(c("group", "pair")), sep = "")
 
   assert_used_names(repair_info, prefix = "as_widecr: ")
 
@@ -241,11 +243,11 @@ repair_widecr <- function(cr_data, ...) {
   if ("game" %in% colnames(res)) {
     res <- res %>%
       select(.data$game,
-             !!! rlang::syms(repair_info$target),
+             !!!rlang::syms(repair_info$target),
              everything())
   } else {
     res <- res %>%
-      select(!!! rlang::syms(repair_info$target),
+      select(!!!rlang::syms(repair_info$target),
              everything())
   }
 

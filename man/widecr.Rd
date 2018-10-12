@@ -27,14 +27,14 @@ as_widecr(cr_data, repair = TRUE, ...)
 of class \code{widecr}: it should inherit classes \code{widecr}, \code{tbl_df} (in other
 words, to be \link[tibble:tibble]{tibble}) and have complete pairs of
 "player"-"score" columns where pair is detected by \strong{digits} after strings
-"player" and "score" respectively.
+"player" and "score" respectively. Columns of "player" and "score" types
+shouldn't have any extra symbols except type name and digits after it. All
+other columns are considered as "extra columns".
 
 \code{as_widecr()} returns an object of class \code{widecr}.
 
-[as_tibble()[tibble::as_tibble()] applied to \code{widecr} object drops \code{widecr}
+\link[tibble:as_tibble]{as_tibble()} applied to \code{widecr} object drops \code{widecr}
 class.
-
-[as_tibble()[tibble::as_tibble()]: R:as_tibble()[tibble::as_tibble()
 }
 \description{
 Functions for dealing with competition results in wide format.
