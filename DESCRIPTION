@@ -1,6 +1,6 @@
 Package: comperes
 Title: Manage Competition Results
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: person("Evgeni", "Chasnovski", email = "evgeni.chasnovski@gmail.com",
     role = c("aut", "cre"))
 Description: Tools for storing and managing competition results. Competition is
@@ -20,10 +20,10 @@ Suggests: covr, knitr, rmarkdown, testthat
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 NeedsCompilation: no
-Packaged: 2018-10-12 19:28:33 UTC; evgeni
+Packaged: 2019-01-12 10:58:44 UTC; evgeni
 Author: Evgeni Chasnovski [aut, cre]
 Maintainer: Evgeni Chasnovski <evgeni.chasnovski@gmail.com>
 Repository: CRAN
-Date/Publication: 2018-10-12 19:50:05 UTC
+Date/Publication: 2019-01-12 11:20:03 UTC

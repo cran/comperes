@@ -1,3 +1,8 @@
+# comperes 0.2.2
+
+* React to `dplyr` version 0.8.0.
+
+
 # comperes 0.2.1
 
 ## Bug fixes
@@ -10,7 +15,7 @@
 * React to `rlang` version 0.3.0.
 
 
-# comperes 0.2.0 (2017-05-09)
+# comperes 0.2.0 (2018-05-09)
 
 Initial CRAN release
 

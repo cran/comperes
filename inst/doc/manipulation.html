@@ -12,14 +12,14 @@
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2018-10-12" />
+<meta name="date" content="2019-01-12" />
 
 <title>Manipulate Competition Results</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,7 +55,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -70,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Manipulate Competition Results</h1>
 <h4 class="author"><em>Evgeni Chasnovski</em></h4>
-<h4 class="date"><em>2018-10-12</em></h4>
+<h4 class="date"><em>2019-01-12</em></h4>
 
 
 
@@ -99,26 +121,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="dt">score  =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,
   <span class="dt">season =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">3</span>))
 ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">as_longcr</span>()
-<span class="co">#&gt; Warning: `list_len()` is soft-deprecated as of rlang 0.2.0.</span>
-<span class="co">#&gt; Please use `new_list()` instead</span>
-<span class="co">#&gt; This warning is displayed once per session.</span>
-<span class="co">#&gt; Warning: `lang()` is soft-deprecated as of rlang 0.2.0.</span>
-<span class="co">#&gt; Please use `call2()` instead</span>
-<span class="co">#&gt; This warning is displayed once per session.</span>
-<span class="co">#&gt; Warning: `new_overscope()` is soft-deprecated as of rlang 0.2.0.</span>
-<span class="co">#&gt; Please use `new_data_mask()` instead</span>
-<span class="co">#&gt; This warning is displayed once per session.</span>
-<span class="co">#&gt; Warning: `overscope_eval_next()` is soft-deprecated as of rlang 0.2.0.</span>
-<span class="co">#&gt; Please use `eval_tidy()` with a data mask instead</span>
-<span class="co">#&gt; This warning is displayed once per session.</span></code></pre></div>
+<span class="st">  </span><span class="kw">as_longcr</span>()</code></pre></div>
 <p>Functions discussed in these topics leverage <code>dplyr</code>’s grammar of data manipulation. Only basic knowledge is enough to use them. Also a knowledge of <code>rlang</code>’s quotation mechanism is preferred.</p>
 <div id="item-summaries" class="section level2">
 <h2>Item summaries</h2>
-<p>Item summary is understand as some summary measurements (of arbitrary nature) of item (one or more columns) present in data. To compute them, <code>comperes</code> offers <code>summarise_*()</code> family of functions in which summary functions should be provided as in <code>dplyr::summarise()</code>. Basically, they are wrappers for grouped summarise with forced ungrouping, conversion to <code>tibble</code> and possible adding prefix to summaries. Couple of examples:</p>
+<p>Item summary is understand as some summary measurements (of arbitrary nature) of item (one or more columns) present in data. To compute them, <code>comperes</code> offers <code>summarise_*()</code> family of functions in which summary functions should be provided as in <code>dplyr::summarise()</code>. Basically, they are wrappers for grouped summarise with forced ungrouping, conversion to <code>tibble</code> and possible adding prefix to summaries. <strong>Note</strong> that if one of columns in item is a factor with implicit <code>NA</code>s (present in vector but not in levels), there will be a warning suggesting to add <code>NA</code> to levels. This is due to <code>group_by()</code> functionality in <code>dplyr</code> after 0.8.0 version.</p>
+<p>Couple of examples:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_player</span>(<span class="dt">mean_score =</span> <span class="kw">mean</span>(score))
-<span class="co">#&gt; Warning: The `printer` argument is soft-deprecated as of rlang 0.3.0.</span>
-<span class="co">#&gt; This warning is displayed once per session.</span>
 <span class="co">#&gt; # A tibble: 3 x 2</span>
 <span class="co">#&gt;   player mean_score</span>
 <span class="co">#&gt;    &lt;dbl&gt;      &lt;dbl&gt;</span>
@@ -145,8 +154,6 @@ cr_long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_long <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">join_item_summary</span>(<span class="st">&quot;season&quot;</span>, <span class="dt">season_mean_score =</span> <span class="kw">mean</span>(score)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">score =</span> score <span class="op">-</span><span class="st"> </span>season_mean_score)
-<span class="co">#&gt; Warning: `chr_along()` is soft-deprecated as of rlang 0.2.0.</span>
-<span class="co">#&gt; This warning is displayed once per session.</span>
 <span class="co">#&gt; # A longcr object:</span>
 <span class="co">#&gt; # A tibble: 8 x 5</span>
 <span class="co">#&gt;   game  player score season season_mean_score</span>
@@ -176,16 +183,13 @@ cr_long <span class="op">%&gt;%</span>
 <span class="co">#&gt; 6 b1         2     6 B                     5                8</span>
 <span class="co">#&gt; 7 b1         1     7 B                     1                7</span>
 <span class="co">#&gt; 8 b2         2     8 B                     5                8</span>
-<span class="co">#&gt; # ... with 2 more variables: season_min_score &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   season_max_score &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; # … with 2 more variables: season_min_score &lt;dbl&gt;, season_max_score &lt;dbl&gt;</span></code></pre></div>
 </div>
 <div id="head-to-head-values" class="section level2">
 <h2>Head-to-Head values</h2>
 <p>Head-to-Head value is a summary statistic of direct confrontation between two players. It is assumed that this value can be computed based only on the players’ <strong>matchups</strong>, data of actual participation for ordered pair of players in one game.</p>
 <p>To compute matchups, <code>comperes</code> has <code>get_matchups()</code>, which returns a <code>widecr</code> object with all matchups actually present in results (including matchups of players with themselves). <strong>Note</strong> that missing values in <code>player</code> column are treated as separate players. It allows operating with games where multiple players’ identifiers are not known. However, when computing Head-to-Head values they treated as single player. Example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_matchups</span>(cr_long)
-<span class="co">#&gt; Warning: `.named` can no longer be a width</span>
-<span class="co">#&gt; This warning is displayed once per session.</span>
 <span class="co">#&gt; # A widecr object:</span>
 <span class="co">#&gt; # A tibble: 18 x 5</span>
 <span class="co">#&gt;    game  player1 score1 player2 score2</span>
@@ -254,10 +258,13 @@ cr_long <span class="op">%&gt;%</span>
 <span class="co">#&gt; 7      NA       1             1.5              1.5       2.5 </span>
 <span class="co">#&gt; 8      NA       2            NA               NA        NA   </span>
 <span class="co">#&gt; 9      NA      NA             0                0         2.5 </span>
-<span class="co">#&gt; # ... with 6 more variables: sum_score_diff &lt;int&gt;,</span>
-<span class="co">#&gt; #   sum_score_diff_pos &lt;dbl&gt;, sum_score &lt;int&gt;, num_wins &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   num_wins2 &lt;dbl&gt;, num &lt;int&gt;</span></code></pre></div>
-<p>To compute Head-to-Head for only subset of players or include values for players that are not in the results, use factor <code>player</code> column. <strong>Note</strong> different use of <code>fill</code> argument.</p>
+<span class="co">#&gt; # … with 6 more variables: sum_score_diff &lt;int&gt;, sum_score_diff_pos &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   sum_score &lt;int&gt;, num_wins &lt;dbl&gt;, num_wins2 &lt;dbl&gt;, num &lt;int&gt;</span></code></pre></div>
+<p>To compute Head-to-Head for only subset of players or include values for players that are not in the results, use factor <code>player</code> column. <strong>Notes</strong>:</p>
+<ul>
+<li>You can use <code>fill</code> argument to replace <code>NA</code>s in certain columns after computing Head-to-Head values.</li>
+<li>As Head-to-Head functions use <code>summarise_item()</code>, there will be a warning in case of implicit <code>NA</code>s in factor columns.</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_long_fac &lt;-<span class="st"> </span>cr_long <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">player =</span> <span class="kw">factor</span>(player, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))
 
@@ -344,17 +351,6 @@ pair_value_mat <span class="op">%&gt;%</span>
 <h2>Pairgames</h2>
 <p>For some ranking algorithms it crucial that games should only be between two players. <code>comperes</code> has function <code>to_pairgames()</code> for this. It removes games with one player. Games with three and more players <code>to_pairgames()</code> splits into <strong>separate games</strong> between unordered pairs of different players without specific order. <strong>Note</strong> that game identifiers are changed to integers but order of initial games is preserved. Example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">to_pairgames</span>(cr_long)
-<span class="co">#&gt; Warning: Unquoting language objects with `!!!` is soft-deprecated as of rlang 0.3.0.</span>
-<span class="co">#&gt; Please use `!!` instead.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   # Bad:</span>
-<span class="co">#&gt;   dplyr::select(data, !!!enquo(x))</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   # Good:</span>
-<span class="co">#&gt;   dplyr::select(data, !!enquo(x))    # Unquote single quosure</span>
-<span class="co">#&gt;   dplyr::select(data, !!!enquos(x))  # Splice list of quosures</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; This warning is displayed once per session.</span>
 <span class="co">#&gt; # A widecr object:</span>
 <span class="co">#&gt; # A tibble: 5 x 5</span>
 <span class="co">#&gt;    game player1 score1 player2 score2</span>
