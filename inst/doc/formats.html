@@ -7,12 +7,13 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2019-01-12" />
+<meta name="date" content="2019-12-14" />
 
 <title>Formats of Competition Results</title>
 
@@ -20,41 +21,67 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
 </style>
 <script>
@@ -70,7 +97,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -81,7 +108,192 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
 
 </head>
 
@@ -91,8 +303,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Formats of Competition Results</h1>
-<h4 class="author"><em>Evgeni Chasnovski</em></h4>
-<h4 class="date"><em>2019-01-12</em></h4>
+<h4 class="author">Evgeni Chasnovski</h4>
+<h4 class="date">2019-12-14</h4>
 
 
 
@@ -104,129 +316,124 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Understanding of <strong>competition</strong> is quite general: it is a set of <strong>games</strong> (abstract event) in which <strong>players</strong> (abstract entity) gain some abstract <strong>scores</strong> (typically numeric). The most natural example is sport results, however not the only one. For example, product rating can be considered as a competition between products as “players”. Here a “game” is a customer that reviews a set of products by rating them with numerical “score” (stars, points, etc.).</p>
 <p>We will need the following packages:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(comperes)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'comperes'</span>
-<span class="co">#&gt; The following object is masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter</span>
-<span class="kw">library</span>(tibble)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(comperes)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(tibble)</a></code></pre></div>
 <div id="storage" class="section level2">
 <h2>Storage</h2>
 <div id="long-format" class="section level3">
 <h3>Long format</h3>
 <p>Results in long format are stored in object of class <code>longcr</code>. It is considered to be a <code>tibble</code> with one row per game-player pair. It should have at least columns with names “game”, “player” and “score”. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_long_raw &lt;-<span class="st"> </span><span class="kw">tibble</span>(
-  <span class="dt">game   =</span> <span class="kw">c</span>(<span class="dv">1</span>,  <span class="dv">1</span>,  <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>),
-  <span class="dt">player =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>),
-  <span class="dt">score  =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span>
-)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">cr_long_raw &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">game   =</span> <span class="kw">c</span>(<span class="dv">1</span>,  <span class="dv">1</span>,  <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">player =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="dt">score  =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">)</a></code></pre></div>
 <p>To convert <code>cr_long_raw</code> into <code>longcr</code> object use <code>as_longcr()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_long &lt;-<span class="st"> </span><span class="kw">as_longcr</span>(cr_long_raw)
-cr_long
-<span class="co">#&gt; # A longcr object:</span>
-<span class="co">#&gt; # A tibble: 8 x 3</span>
-<span class="co">#&gt;    game player score</span>
-<span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     1      1     1</span>
-<span class="co">#&gt; 2     1     NA     2</span>
-<span class="co">#&gt; 3     1     NA     3</span>
-<span class="co">#&gt; 4     2      1     4</span>
-<span class="co">#&gt; 5     2      2     5</span>
-<span class="co">#&gt; 6     3      2     6</span>
-<span class="co">#&gt; 7     3      1     7</span>
-<span class="co">#&gt; 8     4      2     8</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">cr_long &lt;-<span class="st"> </span><span class="kw">as_longcr</span>(cr_long_raw)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">cr_long</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A longcr object:</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; # A tibble: 8 x 3</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;    game player score</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; 1     1      1     1</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 2     1     NA     2</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; 3     1     NA     3</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; 4     2      1     4</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; 5     2      2     5</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; 6     3      2     6</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; 7     3      1     7</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 8     4      2     8</span></a></code></pre></div>
 <p>By default, <code>as_longcr()</code> repairs its input by applying set of heuristics to extract relevant data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(
-  <span class="dt">PlayerRS =</span> <span class="st">&quot;a&quot;</span>,
-  <span class="dt">gameSS =</span> <span class="st">&quot;b&quot;</span>,
-  <span class="dt">extra =</span> <span class="op">-</span><span class="dv">1</span>,
-  <span class="dt">score_game =</span> <span class="dv">10</span>,
-  <span class="dt">player =</span> <span class="dv">1</span>
-) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">as_longcr</span>()
-<span class="co">#&gt; as_longcr: Some matched names are not perfectly matched:</span>
-<span class="co">#&gt;   gameSS -&gt; game</span>
-<span class="co">#&gt;   score_game -&gt; score</span>
-<span class="co">#&gt; # A longcr object:</span>
-<span class="co">#&gt; # A tibble: 1 x 5</span>
-<span class="co">#&gt;   game  player score PlayerRS extra</span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 b          1    10 a           -1</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="dt">PlayerRS =</span> <span class="st">&quot;a&quot;</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="dt">gameSS =</span> <span class="st">&quot;b&quot;</span>,</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="dt">extra =</span> <span class="dv">-1</span>,</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="dt">score_game =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="dt">player =</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="st">  </span><span class="kw">as_longcr</span>()</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; as_longcr: Some matched names are not perfectly matched:</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt;   gameSS -&gt; game</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt;   score_game -&gt; score</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; # A longcr object:</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt;   game  player score PlayerRS extra</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; 1 b          1    10 a           -1</span></a></code></pre></div>
 </div>
 <div id="wide-format" class="section level3">
 <h3>Wide format</h3>
 <p>Results in wide format are stored in object of class <code>widecr</code>. It is considered to be a <code>tibble</code> with one row per game with fixed amount of players. Data should be organized in pairs of columns “player”-“score”. Identifier of a pair should go after respective keyword and consist only from digits. For example: player1, score1, player2, score2. Order doesn’t matter.</p>
 <p>Extra columns are allowed. Column game for game identifier is optional.</p>
 <p>Example of correct wide format:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_wide_raw &lt;-<span class="st"> </span><span class="kw">tibble</span>(
-  <span class="dt">player1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>),
-  <span class="dt">score1  =</span> <span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>),
-  <span class="dt">player2 =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>),
-  <span class="dt">score2  =</span> <span class="op">-</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)
-)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cr_wide_raw &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="dt">player1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="dt">score1  =</span> <span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">player2 =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="dt">score2  =</span> <span class="op">-</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">)</a></code></pre></div>
 <p>To convert <code>cr_wide_raw</code> into <code>widecr</code> object use <code>as_widecr()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cr_wide &lt;-<span class="st"> </span>cr_wide_raw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_widecr</span>()
-cr_wide
-<span class="co">#&gt; # A widecr object:</span>
-<span class="co">#&gt; # A tibble: 3 x 4</span>
-<span class="co">#&gt;   player1 score1 player2 score2</span>
-<span class="co">#&gt;     &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;</span>
-<span class="co">#&gt; 1       1     -1       2     -4</span>
-<span class="co">#&gt; 2       1     -2       3     -5</span>
-<span class="co">#&gt; 3       2     -3       3     -6</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">cr_wide &lt;-<span class="st"> </span>cr_wide_raw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_widecr</span>()</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">cr_wide</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; # A widecr object:</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; # A tibble: 3 x 4</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;   player1 score1 player2 score2</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;     &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 1       1     -1       2     -4</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 2       1     -2       3     -5</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 3       2     -3       3     -6</span></a></code></pre></div>
 <p>By default, <code>as_widecr()</code> also does repairing of its input:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(
-  <span class="dt">score =</span> <span class="dv">2</span>,
-  <span class="dt">PlayerRS =</span> <span class="st">&quot;a&quot;</span>,
-  <span class="dt">scoreRS =</span> <span class="dv">1</span>,
-  <span class="dt">player =</span> <span class="st">&quot;b&quot;</span>,
-  <span class="dt">player1 =</span> <span class="st">&quot;c&quot;</span>,
-  <span class="dt">extra =</span> <span class="op">-</span><span class="dv">1</span>,
-  <span class="dt">game =</span> <span class="st">&quot;game&quot;</span>
-) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">as_widecr</span>()
-<span class="co">#&gt; as_widecr: Some matched names are not perfectly matched:</span>
-<span class="co">#&gt;   player -&gt; player1</span>
-<span class="co">#&gt;   score -&gt; score1</span>
-<span class="co">#&gt;   player1 -&gt; player2</span>
-<span class="co">#&gt;   PlayerRS -&gt; player3</span>
-<span class="co">#&gt;   scoreRS -&gt; score3</span>
-<span class="co">#&gt; as_widecr: Next columns are not found. Creating with NAs.</span>
-<span class="co">#&gt;   score2</span>
-<span class="co">#&gt; # A widecr object:</span>
-<span class="co">#&gt; # A tibble: 1 x 8</span>
-<span class="co">#&gt;   game  player1 score1 player2 score2 player3 score3 extra</span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 game  b            2 c           NA a            1    -1</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="dt">score =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">PlayerRS =</span> <span class="st">&quot;a&quot;</span>,</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dt">scoreRS =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="dt">player =</span> <span class="st">&quot;b&quot;</span>,</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  <span class="dt">player1 =</span> <span class="st">&quot;c&quot;</span>,</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">  <span class="dt">extra =</span> <span class="dv">-1</span>,</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="dt">game =</span> <span class="st">&quot;game&quot;</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">  </span><span class="kw">as_widecr</span>()</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; as_widecr: Some matched names are not perfectly matched:</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;   player -&gt; player1</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;   score -&gt; score1</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;   player1 -&gt; player2</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt;   PlayerRS -&gt; player3</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt;   scoreRS -&gt; score3</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; as_widecr: Next columns are not found. Creating with NAs.</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt;   score2</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; # A widecr object:</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; # A tibble: 1 x 8</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt;   game  player1 score1 player2 score2 player3 score3 extra</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; 1 game  b            2 c           NA a            1    -1</span></a></code></pre></div>
 </div>
 </div>
 <div id="conversion" class="section level2">
 <h2>Conversion</h2>
 <p><code>as_longcr()</code> and <code>as_widecr()</code> do actual conversion applied to <code>widecr</code> and <code>longcr</code> objects respectively:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_longcr</span>(cr_wide)
-<span class="co">#&gt; # A longcr object:</span>
-<span class="co">#&gt; # A tibble: 6 x 3</span>
-<span class="co">#&gt;    game player score</span>
-<span class="co">#&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     1      1    -1</span>
-<span class="co">#&gt; 2     1      2    -4</span>
-<span class="co">#&gt; 3     2      1    -2</span>
-<span class="co">#&gt; 4     2      3    -5</span>
-<span class="co">#&gt; 5     3      2    -3</span>
-<span class="co">#&gt; 6     3      3    -6</span>
-
-<span class="co"># Determines number of players in game as</span>
-<span class="co"># actual maximum number of players in games</span>
-<span class="kw">as_widecr</span>(cr_long)
-<span class="co">#&gt; # A widecr object:</span>
-<span class="co">#&gt; # A tibble: 4 x 7</span>
-<span class="co">#&gt;    game player1 score1 player2 score2 player3 score3</span>
-<span class="co">#&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;</span>
-<span class="co">#&gt; 1     1       1      1      NA      2      NA      3</span>
-<span class="co">#&gt; 2     2       1      4       2      5      NA     NA</span>
-<span class="co">#&gt; 3     3       2      6       1      7      NA     NA</span>
-<span class="co">#&gt; 4     4       2      8      NA     NA      NA     NA</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">as_longcr</span>(cr_wide)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; # A longcr object:</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;    game player score</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 1     1      1    -1</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 2     1      2    -4</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 3     2      1    -2</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 4     2      3    -5</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; 5     3      2    -3</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 6     3      3    -6</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co"># Determines number of players in game as</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co"># actual maximum number of players in games</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="kw">as_widecr</span>(cr_long)</a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; # A widecr object:</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; # A tibble: 4 x 7</span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;    game player1 score1 player2 score2 player3 score3</span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 1     1       1      1      NA      2      NA      3</span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; 2     2       1      4       2      5      NA     NA</span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; 3     3       2      6       1      7      NA     NA</span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; 4     4       2      8      NA     NA      NA     NA</span></a></code></pre></div>
 </div>
 <div id="notes" class="section level2">
 <h2>Notes</h2>
@@ -242,6 +449,9 @@ This way one can operate with games between variable number of players with mini
 </ul>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
