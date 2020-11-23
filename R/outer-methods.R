@@ -215,7 +215,7 @@ slice.h2h_long <- function(.data, ...) {
 }
 
 inner_join.h2h_long <- function(x, y, by = NULL, copy = FALSE,
-                              suffix = c(".x", ".y"), ...) {
+                                suffix = c(".x", ".y"), ...) {
   reconstruct(NextMethod(), x)
 }
 
@@ -271,7 +271,7 @@ print.h2h_long <- function(x, ...) {
 print.h2h_mat <- function(x, ...) {
   cat("# A matrix format of Head-to-Head values:\n")
 
-  y <- remove_class_cond(x, "h2h_mat")
+  y <- remove_class_cond(remove_class_cond(x, "h2h_mat"), "matrix")
 
   print(y)
 }

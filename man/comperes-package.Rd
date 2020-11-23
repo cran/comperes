@@ -27,12 +27,12 @@ amount of players.
 \item \strong{Summarise}:
 \itemize{
 \item Compute \link[=item-summary]{item summaries} with functions using
-\href{http://dplyr.tidyverse.org}{dplyr}'s grammar of data manipulation.
+\href{https://dplyr.tidyverse.org}{dplyr}'s grammar of data manipulation.
 \item Compute and \link[=item-summary-join]{join} item summaries to data for easy
 transformation.
 \item Use \link[=summary_funs]{common item summary functions} with
 \href{https://CRAN.R-project.org/package=rlang}{rlang}'s
-\link[rlang:quasiquotation]{unquoting} mechanism.
+\link[rlang:nse-force]{unquoting} mechanism.
 }
 \item \strong{Compute Head-to-Head values} (a summary statistic of direct
 confrontation between two players) with functions also using dplyr's grammar:
@@ -58,6 +58,6 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Evgeni Chasnovski \email{evgeni.chasnovski@gmail.com}
+\strong{Maintainer}: Evgeni Chasnovski \email{evgeni.chasnovski@gmail.com} (\href{https://orcid.org/0000-0002-1617-4019}{ORCID})
 
 }

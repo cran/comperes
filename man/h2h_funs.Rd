@@ -14,11 +14,11 @@ h2h_funs
 List of commonly used functions for computing Head-to-Head values.
 }
 \details{
-\code{h2h_funs} is a named list of \link[rlang:expr]{expressions}
+\code{h2h_funs} is a named list of \link[rlang:nse-defuse]{expressions}
 representing commonly used expressions of Head-to-Head functions for
 computing Head-to-Head values with \code{\link[=h2h_long]{h2h_long()}} or \code{\link[=h2h_mat]{h2h_mat()}}. Names of the
 elements will be used as Head-to-Head value names. To use them inside
-\code{h2h_long()} or \code{h2h_mat()} use \link[rlang:quasiquotation]{unquoting} mechanism
+\code{h2h_long()} or \code{h2h_mat()} use \link[rlang:nse-force]{unquoting} mechanism
 from rlang package.
 
 Currently present functions:
@@ -49,7 +49,6 @@ versions.
 ncaa2005 \%>\% h2h_long(!!!h2h_funs)
 
 ncaa2005 \%>\% h2h_mat(!!!h2h_funs["num_wins2"])
-
 }
 \seealso{
 \link[=h2h_long]{Long format} of Head-to-Head values.

@@ -1,6 +1,13 @@
 context("outer-methods")
 
 
+# Helper functions --------------------------------------------------------
+# Taken from https://github.com/harrelfe/Hmisc/blob/master/R/regexpEscape.s
+escape_regex <- function(string) {
+  gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", string)
+}
+
+
 # Input data --------------------------------------------------------------
 input_longcr <- tibble::tibble(
   game = 1:10,
@@ -32,8 +39,10 @@ input_h2h_long <- tibble::tibble(
 input_h2h_long <- add_class(input_h2h_long, "h2h_long")
 
 input_h2h_mat_raw <- matrix(
+  # styler: off
   c(1, NA,
     0, 2),
+  # styler: on
   nrow = 2, dimnames = list(c("1", "2"), c("1", "2")),
   byrow = TRUE
 )
@@ -176,10 +185,11 @@ test_that("[.longcr works", {
 
 # print.longcr ------------------------------------------------------------
 test_that("print.longcr works", {
+  skip_on_cran()
   input <- input_longcr
   class(input) <- class(tibble::tibble())
 
-  tibble_output_ref <- capture_output(print(input))
+  tibble_output_ref <- escape_regex(capture_output(print(input)))
 
   expect_output(
     print(as_longcr(input_longcr)),
@@ -322,10 +332,11 @@ test_that("[.widecr works", {
 
 # print.widecr ------------------------------------------------------------
 test_that("print.widecr works", {
+  skip_on_cran()
   input <- input_widecr
   class(input) <- class(tibble::tibble())
 
-  tibble_output_ref <- capture_output(print(input))
+  tibble_output_ref <- escape_regex(capture_output(print(input)))
 
   expect_output(
     print(input_widecr),
@@ -468,10 +479,11 @@ test_that("[.h2h_long works", {
 
 # print.h2h_long ------------------------------------------------------------
 test_that("print.h2h_long works", {
+  skip_on_cran()
   input <- input_h2h_long
   class(input) <- class(tibble::tibble())
 
-  tibble_output_ref <- capture_output(print(input))
+  tibble_output_ref <- escape_regex(capture_output(print(input)))
 
   expect_output(
     print(input_h2h_long),
@@ -498,11 +510,19 @@ test_that("[.h2h_mat works with only one argument", {
 
 # print.h2h_mat ------------------------------------------------------------
 test_that("print.h2h_mat works", {
-  matrix_output_ref <- capture_output(print(input_h2h_mat_raw))
+  skip_on_cran()
+  matrix_output_ref <- escape_regex(capture_output(print(input_h2h_mat_raw)))
 
   expect_false(grepl("h2h_mat", matrix_output_ref))
   expect_output(
     print(input_h2h_mat),
     paste0("# A matrix format of Head-to-Head values:\n.*", matrix_output_ref)
   )
+})
+
+test_that("print.h2h_mat doesn't print matrix attributes", {
+  skip_on_cran()
+  out <- ncaa2005 %>% h2h_mat(mean(score1 - score2))
+  out_print <- escape_regex(capture_output(print(out)))
+  expect_false(grepl('attr\\(,"class"\\)', out_print))
 })
