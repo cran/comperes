@@ -169,10 +169,16 @@ reduce_full_join <- function(x, by) {
 get_matchups <- function(cr_data) {
   cr <- cr_data %>%
     as_longcr(repair = TRUE) %>%
-    select(.data$game, .data$player, .data$score)
+    select("game", "player", "score")
   class(cr) <- class(tibble::tibble())
 
-  left_join(x = cr, y = cr, by = "game", suffix = c("1", "2")) %>%
+  left_join(
+    x = cr,
+    y = cr,
+    by = "game",
+    suffix = c("1", "2"),
+    multiple = "all"
+  ) %>%
     as_widecr()
 }
 

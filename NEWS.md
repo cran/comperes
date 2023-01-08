@@ -1,3 +1,7 @@
+# comperes 0.2.6
+
+* Maintenance release in reaction to a planned update of `dplyr` to 1.1.0.
+
 # comperes 0.2.5
 
 * Maintenance release in reaction to a planned update of `tibble`.

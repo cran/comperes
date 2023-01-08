@@ -1,6 +1,6 @@
 Package: comperes
 Title: Manage Competition Results
-Version: 0.2.5
+Version: 0.2.6
 Authors@R: 
     person(given = "Evgeni",
            family = "Chasnovski",
@@ -25,10 +25,10 @@ Suggests: covr, knitr, rmarkdown, testthat
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 NeedsCompilation: no
-Packaged: 2020-11-23 20:51:47 UTC; evgeni
+Packaged: 2023-01-08 18:31:23 UTC; evgeni
 Author: Evgeni Chasnovski [aut, cre] (<https://orcid.org/0000-0002-1617-4019>)
 Maintainer: Evgeni Chasnovski <evgeni.chasnovski@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-11-23 21:20:02 UTC
+Date/Publication: 2023-01-08 19:00:02 UTC
